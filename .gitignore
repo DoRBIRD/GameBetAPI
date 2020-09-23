@@ -1,0 +1,3 @@
+# Project exclude paths
+/game-bet-api/dist/
+/game-bet-api/node_modules/
