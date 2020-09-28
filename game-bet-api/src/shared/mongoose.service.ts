@@ -10,7 +10,8 @@ const options = {
     bufferMaxEntries: 0,
     // all other approaches are now deprecated by MongoDB:
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 
 };
 const connectWithRetry = () => {
@@ -22,7 +23,7 @@ const connectWithRetry = () => {
         mongoose.connection.useDb("gamebet")
     }).catch(err => {
         // tslint:disable-next-line:no-console
-        console.log("MongoDB connection unsuccessful, retry after 5 seconds. ", ++count);
+        console.log("MongoDB connection unsuccessful, retry after 5 seconds. ", ++count, err.message);
         setTimeout(connectWithRetry, 5000)
     })
 

@@ -11,16 +11,21 @@ class UserController {
         req.body.password = hashPassword(req.body.password)
         req.body.permissionLevel = 1;
         this.userModel.create(req.body)
-            .then(
-                (result: any) => {
+            .then((result: any) => {
                     res.status(StatusCodes.CREATED).send({id: result._id});
-                });
+                })
+            .catch(reason => {
+                res.status(StatusCodes.BAD_REQUEST).send({error: reason.message})
+            });
     };
 
     public findById = (req: Request, res: Response) => {
         this.userModel.findById(req.params.userId)
             .then(result => {
                 res.status(StatusCodes.OK).send(result);
+            })
+            .catch(reason => {
+                res.status(StatusCodes.BAD_REQUEST).send({error: reason.message})
             });
     }
 
@@ -28,7 +33,7 @@ class UserController {
         this.userModel.all()
             .then(result => {
                 res.status(StatusCodes.OK).send(result);
-            });
+            })
     }
 
     public remove = (req: Request, res: Response) => {
@@ -44,8 +49,8 @@ class UserController {
 
         this.userModel.patch(req.params.userId, req.body)
             .then((result) => {
-                res.status(StatusCodes.NO_CONTENT).send({});
-            });
+                res.status(StatusCodes.NO_CONTENT).send(result);
+            })
     }
 
     public list = (req: Request, res: Response) => {

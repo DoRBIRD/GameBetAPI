@@ -4,13 +4,13 @@ import BetController from "@controllers/bet.controller";
 const router = Router();
 const betController = new BetController();
 
+router.get("/", [betController.list]);
 
-router.post("/add/:betId", [betController.insert]);
-router.get("/show/:betId", [betController.findById]);
-router.patch("/update/:betId", [betController.patchById]);
-router.delete("/remove/:betId", [betController.remove]);
+router.post("/:betId", [betController.insert]);
+router.get("/:betId", [betController.findById]);
+router.patch("/:betId", [betController.patchById]);
+router.delete("/:betId", [betController.remove]);
 
-router.get("/all", [betController.findAll]);
 router.get("/userId/:userId", [betController.findByUserId]);
 router.get("/lobbyId/:lobbyId", [betController.findByLobbyId]);
 

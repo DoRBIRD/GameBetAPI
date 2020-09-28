@@ -4,13 +4,13 @@ import GameAccountController from "@controllers/gameAccount.controller";
 const router = Router();
 const gameAccountController = new GameAccountController();
 
+router.get("/", [gameAccountController.findAll]);
 
-router.post("/add/:gameAccountId", [gameAccountController.insert]);
-router.get("/show/:gameAccountId", [gameAccountController.findById]);
-router.patch("/update/:gameAccountId", [gameAccountController.patchById]);
-router.delete("/remove/:gameAccountId", [gameAccountController.remove]);
+router.post("/:gameAccountId", [gameAccountController.insert]);
+router.get("/:gameAccountId", [gameAccountController.findById]);
+router.patch("/:gameAccountId", [gameAccountController.patchById]);
+router.delete("/:gameAccountId", [gameAccountController.remove]);
 
-router.get("/all", [gameAccountController.findAll]);
 router.get("/user/:userId", [gameAccountController.findByUserId]);
 
 export default router;
